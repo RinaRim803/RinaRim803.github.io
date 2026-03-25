@@ -363,6 +363,7 @@
     }
     .contact-link:hover { border-color: var(--accent); color: var(--accent); }
 
+
     /* ── Footer ── */
     footer {
       position: relative; z-index: 1;
@@ -390,6 +391,109 @@
       .card-body { grid-template-columns: 1fr; }
       .card-header { flex-direction: column; gap: 0.75rem; }
     }
+
+    /* ── README Modal ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      width: 100%;
+      max-width: 780px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .modal-title {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+    .modal-close {
+      font-family: var(--mono);
+      font-size: 1rem;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-body {
+      padding: 1.5rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    /* README markdown styles */
+    .readme-content { font-family: var(--sans); font-size: 0.9rem; line-height: 1.7; color: var(--text); }
+    .readme-content h1 { font-size: 1.4rem; font-weight: 700; margin: 0 0 1rem; color: var(--text); }
+    .readme-content h2 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+    .readme-content h3 { font-size: 0.95rem; font-weight: 600; margin: 1rem 0 0.4rem; color: var(--accent2); }
+    .readme-content p { margin: 0.6rem 0; color: var(--muted); }
+    .readme-content strong { color: var(--text); font-weight: 500; }
+    .readme-content code { font-family: var(--mono); font-size: 0.8rem; background: var(--bg3); padding: 0.15rem 0.4rem; border-radius: 2px; color: var(--accent2); }
+    .readme-content pre { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 0.75rem 0; }
+    .readme-content pre code { background: none; padding: 0; color: var(--text); font-size: 0.78rem; }
+    .readme-content table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.82rem; }
+    .readme-content th { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); border-bottom: 1px solid var(--border); padding: 0.4rem 0.75rem; text-align: left; }
+    .readme-content td { padding: 0.4rem 0.75rem; border-bottom: 1px solid var(--border); color: var(--muted); }
+    .readme-content ul, .readme-content ol { padding-left: 1.5rem; margin: 0.5rem 0; color: var(--muted); }
+    .readme-content li { margin: 0.25rem 0; }
+    .readme-content blockquote { border-left: 2px solid var(--accent); padding: 0.5rem 1rem; margin: 0.75rem 0; background: var(--bg3); }
+    .readme-content blockquote p { color: var(--text); font-style: italic; }
+    .readme-content a { color: var(--accent); text-decoration: none; }
+    .readme-content a:hover { text-decoration: underline; }
+    .modal-loading {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      padding: 3rem;
+    }
+
+    /* Custom scrollbar — modal body */
+    .modal-body::-webkit-scrollbar { width: 4px; }
+    .modal-body::-webkit-scrollbar-track { background: transparent; }
+    .modal-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+    .modal-body::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+    /* Firefox */
+    .modal-body { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent; }
+    
+    /* View README button */
+    .btn-readme {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--muted);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.04em;
+    }
+    .btn-readme:hover { border-color: var(--accent2); color: var(--accent2); }
   </style>
 </head>
 <body>
@@ -599,9 +703,10 @@
             <span class="card-tag">SMTP</span>
             <span class="card-tag">modular</span>
           </div>
-          <a href="https://github.com/RinaRim803/sys-health-check" target="_blank" class="card-link">
-            GitHub <span>→</span>
-          </a>          
+          <div style="display:flex; gap:0.75rem; align-items:center;">
+            <button class="btn-readme" onclick="openReadme('RinaRim803/sys-health-check', 'sys-health-check')">View README</button>
+            <a href="https://github.com/RinaRim803/sys-health-check" target="_blank" class="card-link">GitHub <span>→</span></a>
+          </div>        
           </div>
         </div>
       </div>
@@ -649,10 +754,14 @@
               <span class="card-tag">TCP/IP</span>
               <span class="card-tag">Cloud (AWS/Azure)</span>
               <span class="card-tag">Automation</span>
-            </div>          
-            <a href="https://github.com/RinaRim803/network-troubleshooter" target="_blank" class="card-link">
+            </div> 
+            <div style="display:flex; gap:0.75rem; align-items:center;">
+              <button class="btn-readme" onclick="openReadme('RinaRim803/network-troubleshooter', 'network-troubleshooter')">View README</button>
+              <a href="https://github.com/RinaRim803/network-troubleshooter" target="_blank" class="card-link">
               GitHub <span>→</span>
-            </a>
+              </a>
+            </div>         
+            
           </div>         
         </div>
       </div>
@@ -700,12 +809,26 @@
     </div>
   </section>
 
+  <!-- README Modal -->
+  <div class="modal-overlay" id="readme-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title" id="modal-title">README.md</span>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <div class="modal-loading">Fetching README...</div>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <span>Namuk Rim · IT Support &amp; Automation · Built with HTML/CSS/JS</span>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
-    // Fade-in on scroll
+    // ── Fade-in on scroll ──
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(el => {
         if (el.isIntersecting) {
@@ -713,8 +836,66 @@
         }
       });
     }, { threshold: 0.1 });
-
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+ 
+    // ── GitHub README Modal ──
+    const readmeCache = {};
+ 
+    async function openReadme(repo, title) {
+      const modal   = document.getElementById('readme-modal');
+      const body    = document.getElementById('modal-body');
+      const heading = document.getElementById('modal-title');
+ 
+      heading.textContent = title + ' / README.md';
+      body.innerHTML = '<div class="modal-loading">Fetching README...</div>';
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+ 
+      // Return cached version if already fetched
+      if (readmeCache[repo]) {
+        body.innerHTML = readmeCache[repo];
+        return;
+      }
+ 
+      try {
+        const res = await fetch(`https://api.github.com/repos/${repo}/readme`, {
+          headers: { 'Accept': 'application/vnd.github.v3+json' }
+        });
+ 
+        if (!res.ok) {
+          body.innerHTML = '<div class="modal-loading">README not found.</div>';
+          return;
+        }
+ 
+        const data    = await res.json();
+        // GitHub returns README content as base64 — decode it
+        const decoded = decodeURIComponent(escape(atob(data.content)));
+        const html    = marked.parse(decoded);
+        const wrapped = `<div class="readme-content">${html}</div>`;
+ 
+        readmeCache[repo] = wrapped;
+        body.innerHTML    = wrapped;
+ 
+      } catch (err) {
+        body.innerHTML = '<div class="modal-loading">Failed to load README. Check your connection.</div>';
+      }
+    }
+ 
+    function closeModal() {
+      const modal = document.getElementById('readme-modal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+ 
+    // Close on overlay click
+    document.getElementById('readme-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+ 
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
   </script>
 </body>
 </html>
