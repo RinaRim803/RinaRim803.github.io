@@ -1,11 +1,14 @@
 // ── Fade-in on scroll ──
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(el => {
-    if (el.isIntersecting) {
-      el.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1 });
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((el) => {
+      if (el.isIntersecting) {
+        el.target.classList.add("visible");
+      }
+    });
+  },
+  { threshold: 0.1 },
+);
 
 // ── Project card renderer ──
 // Reads PROJECTS from data/projects.js and builds cards dynamically.
@@ -40,7 +43,7 @@ function buildActiveCard(p) {
       </div>
       <div class="card-footer">
         <div class="card-tags">
-          ${p.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}
+          ${p.tags.map((t) => `<span class="card-tag">${t}</span>`).join("")}
         </div>
         <div style="display:flex; gap:0.75rem; align-items:center;">
           <button class="btn-readme" onclick="openReadme('${p.repo}', '${p.id}')">View README</button>
@@ -71,26 +74,26 @@ function buildPlaceholderCard(p) {
       </div>
       <div class="card-footer">
         <div class="card-tags">
-          ${p.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}
+          ${p.tags.map((t) => `<span class="card-tag">${t}</span>`).join("")}
         </div>
       </div>
     </div>`;
 }
 
 function renderProjects() {
-  const container = document.getElementById('projects-list');
-  if (!container || typeof PROJECTS === 'undefined') return;
+  const container = document.getElementById("projects-list");
+  if (!container || typeof PROJECTS === "undefined") return;
 
-  container.innerHTML = PROJECTS
-    .map(p => p.active ? buildActiveCard(p) : buildPlaceholderCard(p))
-    .join('');
+  container.innerHTML = PROJECTS.map((p) =>
+    p.active ? buildActiveCard(p) : buildPlaceholderCard(p),
+  ).join("");
 
   // Re-observe newly rendered cards for fade-in
-  container.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  container.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
 }
 
 // ── Init ──
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
   renderProjects();
 });
