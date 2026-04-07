@@ -58,98 +58,15 @@
       </div>
     </section>
 
+    <!-- Skills -->
     <section id="skills">
       <div class="section-label">skills</div>
       <h2>Core Competencies</h2>
-      <div style="display: flex; flex-direction: column; gap: 2rem">
-        <div>
-          <div class="skills-label">
-            IT Support &amp; Infrastructure
-          </div>
-          <div class="skills-grid fade-in">
-            <div class="skill-item">
-              <span class="skill-name">CompTIA A+ Certified</span>
-              <span class="skill-note"
-                >Hardware, Networking, and Cloud Computing Standards</span
-              >
-              <span class="skill-tag tag-tool">Certified</span>
-            </div>
-            <div class="skill-item">
-              <span class="skill-name">Enterprise OS Support</span>
-              <span class="skill-note"
-                >Advanced troubleshooting: Windows 10/11, macOS, &amp;
-                Linux</span
-              >
-              <span class="skill-tag tag-os">OS</span>
-            </div>
-            <div class="skill-item">
-              <span class="skill-name">Network Administration</span>
-              <span class="skill-note"
-                >TCP/IP, DNS, VPN, Port diagnostics (L1–L4)</span
-              >
-              <span class="skill-tag tag-tool">Networking</span>
-            </div>
-            <div class="skill-item">
-              <span class="skill-name">Technical Operations</span>
-              <span class="skill-note"
-                >ITIL lifecycle, SLA-based ticketing, &amp; Remote Support
-                (RDP/SSH)</span
-              >
-              <span class="skill-tag tag-tool">Service Desk</span>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="skills-label">
-            Automation &amp; Development
-          </div>
-          <div class="skills-grid fade-in">
-            <div class="skill-item">
-              <span class="skill-name">Python Automation</span>
-              <span class="skill-note"
-                >Custom diagnostic tools using psutil, Sockets, &amp; SMTP</span
-              >
-              <span class="skill-tag tag-auto">Advanced</span>
-            </div>
-            <div class="skill-item">
-              <span class="skill-name">System Scripting</span>
-              <span class="skill-note"
-                >PowerShell &amp; Bash for OS-level task automation</span
-              >
-              <span class="skill-tag tag-auto">Automation</span>
-            </div>
-            <div class="skill-item">
-              <span class="skill-name">Backend &amp; API</span>
-              <span class="skill-note"
-                >Flask REST APIs, SQLite3 database, &amp; JSON integration</span
-              >
-              <span class="skill-tag tag-auto">Development</span>
-            </div>
-            <div class="skill-item">
-              <span class="skill-name">DevOps &amp; Docs</span>
-              <span class="skill-note"
-                >Git version control, GitHub Actions, &amp; Technical
-                Documentation</span
-              >
-              <span class="skill-tag tag-tool">Infrastructure</span>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="skills-label">Cloud Awareness</div>
-          <div class="skills-grid fade-in">
-            <div class="skill-item">
-              <span class="skill-name">Cloud Diagnostics</span>
-              <span class="skill-note"
-                >AWS/Azure region latency analysis &amp; service endpoint
-                monitoring</span
-              >
-              <span class="skill-tag tag-tool">Cloud</span>
-            </div>
-          </div>
-        </div>
+      <div
+        id="skills-list"
+        style="display: flex; flex-direction: column; gap: 2rem"
+      >
+        <!-- Rendered dynamically from data/skills.js -->
       </div>
     </section>
 
@@ -212,6 +129,7 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <!-- Data -->
+    <script src="data/skills.js"></script>
     <script src="data/projects.js"></script>
 
     <!-- App -->

@@ -10,6 +10,39 @@ const observer = new IntersectionObserver(
   { threshold: 0.1 },
 );
 
+// ── Skills renderer ──
+// Reads SKILLS from data/skills.js and builds the skills section dynamically.
+// To add/edit skills: edit data/skills.js only — no HTML changes needed.
+
+function buildSkillItem(item) {
+  return `
+    <div class="skill-item">
+      <span class="skill-name">${item.name}</span>
+      <span class="skill-note">${item.note}</span>
+      <span class="skill-tag tag-${item.type}">${item.tag}</span>
+    </div>`;
+}
+
+function buildSkillCategory(category) {
+  return `
+    <div>
+      <div class="skills-label">${category.label}</div>
+      <div class="skills-grid fade-in">
+        ${category.items.map(buildSkillItem).join("")}
+      </div>
+    </div>`;
+}
+
+function renderSkills() {
+  const container = document.getElementById("skills-list");
+  if (!container || typeof SKILLS === "undefined") return;
+
+  container.innerHTML = SKILLS.map(buildSkillCategory).join("");
+
+  // Observe newly rendered grids for fade-in
+  container.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+}
+
 // ── Project card renderer ──
 // Reads PROJECTS from data/projects.js and builds cards dynamically.
 // To add a project: edit data/projects.js only — no HTML changes needed.
@@ -95,5 +128,6 @@ function renderProjects() {
 // ── Init ──
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+  renderSkills();
   renderProjects();
 });
