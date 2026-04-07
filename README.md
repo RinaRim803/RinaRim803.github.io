@@ -2,7 +2,7 @@
 
 > Personal portfolio site built with vanilla HTML/CSS/JS and deployed via GitHub Pages.
 
-🔗 **Live Site:** [rinarin803.github.io](https://rinarin803.github.io)
+🔗 **Live Site:** [rinarin803.github.io](https://rinarim803.github.io)
 
 ---
 
