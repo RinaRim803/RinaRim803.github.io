@@ -15,50 +15,78 @@
 
 const PROJECTS = [
   {
-    id:       "sys-health-check",
-    title:    "sys-health-check",
-    tag:      "Windows · macOS · Linux",
-    repo:     "RinaRim803/sys-health-check",
-    tags:     ["Python", "psutil", "SMTP", "modular"],
-    scenario: 'User submits a ticket: <span style="color:var(--warning);">"My computer is running slow"</span>',
-    problem:  "Technician spends 10–15 min manually checking Task Manager, disk, and network before any fix starts",
-    solution: "Single script checks CPU, RAM, Disk, Network, Services — auto-identifies root cause on WARNING, cleans temp files, sends Gmail alert",
-    result:   "10–15 min → under 60 sec",
-    active:   true,
+    id: "sys-health-check",
+    title: "System Health Checker",
+    tag: "Windows · macOS · Linux",
+    repo: "RinaRim803/sys-health-check",
+    tags: ["Python", "psutil", "SMTP", "modular"],
+    scenario:
+      'User submits a ticket: <span style="color:var(--warning);">"My computer is running slow"</span>',
+    problem:
+      "Technician spends 10–15 min manually checking Task Manager, disk, and network before any fix starts",
+    solution:
+      "Single script checks CPU, RAM, Disk, Network, Services — auto-identifies root cause on WARNING, cleans temp files, sends Gmail alert",
+    result: "10–15 min → under 60 sec",
+    active: true,
   },
   {
-    id:       "network-troubleshooter",
-    title:    "network-troubleshooter",
-    tag:      "Infrastructure · Python · Automation",
-    repo:     "RinaRim803/network-troubleshooter",
-    tags:     ["Python", "TCP/IP", "Flask", "REST API", "Cloud (AWS/Azure)", "Automation"],
-    scenario: 'A user submits a ticket: <span style="color:var(--warning);">"The internet is slow"</span> or <span style="color:var(--warning);">"I can\'t connect to the server."</span>',
-    problem:  "Manual diagnostics (ping, ipconfig) take 10–15 mins per ticket and fail to distinguish between local ISP issues and specific Cloud region (AWS/Azure) degradations. Findings are never recorded — no ticket, no audit trail.",
-    solution: "A modular Python engine that automates a full-stack check (L1–L4) and ranks global cloud regions by real-time TCP latency to pinpoint regional outages instantly. On failure, each failed check is automatically converted into a structured ticket via REST API. On success, the user is prompted to optionally save the run as an audit record.",
-    result:   'Reduced troubleshooting time from <strong>15 mins to under 2 mins</strong>. Provided data-driven failover suggestions, cutting decision-making time for on-call engineers. Every diagnostic run is now traceable — failed checks auto-create tickets in the IT Ticket System.',
-    active:   true,
-  },{
-    id:       "it-ticket-system",
-    title:    "it-ticket-system",
-    tag:      "ITSM · Python · Flask · Automation",
-    repo:     "RinaRim803/it-ticket-system",
-    tags:     ["Python", "Flask", "SQLite3", "REST API", "ITSM", "Automation"],
-    scenario: 'After building <span style="color:var(--warning);">sys-health-check</span> and <span style="color:var(--warning);">network-troubleshooter</span>, I realized alerts were being acted on and forgotten — no record of what broke, when, or how it was resolved.',
-    problem:  "Diagnostic tools ran in isolation. Incidents were tracked verbally or by email, priority decisions were subjective, and there was no audit trail to demonstrate response times or spot recurring issues.",
-    solution: "A Flask-based ITSM API server that receives alerts from the other two tools via HTTP POST and implements the full ITIL ticket lifecycle — auto-categorization, SLA priority assignment (P1–P4), status tracking, and audit logging. All classification rules and server settings are controlled via config.json with no code changes required.",
-    result:   'Every WARNING or FAIL detected by the diagnostic tools <strong>automatically becomes a tracked ticket</strong>. Priority is assigned by rule, not gut feeling. Full status history is preserved in SQLite — turning a reactive, ad-hoc workflow into a structured, auditable IT support pipeline.',
-    active:   true,
+    id: "network-troubleshooter",
+    title: "Network Troubleshooter",
+    tag: "Infrastructure · Python · Automation",
+    repo: "RinaRim803/network-troubleshooter",
+    tags: ["Python", "TCP/IP", "Flask", "REST API", "Cloud (AWS/Azure)"],
+    scenario:
+      'User reports: <span style="color:var(--warning);">"The internet is slow"</span> or <span style="color:var(--warning);">"Server connection failed."</span>',
+    problem:
+      "Manual diagnostics take 15 mins and fail to distinguish between local ISP issues and specific Cloud (AWS/Azure) region degradations.",
+    solution:
+      "Automated L1–L4 diagnostic engine that ranks global cloud regions by real-time TCP latency. Failed checks are automatically converted into structured tickets via REST API for instant incident logging.",
+    result:
+      "Reduced diagnostic time from <strong>15 mins to under 2 mins</strong>. Pinpoints regional outages instantly and ensures 100% traceability through automated ticket creation.",
+    active: true,
   },
   {
-    id:       "user-automation-scripts",
-    title:    "user-automation-scripts",
-    tag:      "coming soon",
-    repo:     "coming soon",
-    tags:     ["Python", "SQLite3", "ITSM"],
-    scenario: "",
-    problem:  "",
-    solution: "",
-    result:   "TBD",
-    active:   false,
+    id: "it-ticket-system",
+    title: "IT Ticket System (ITSM)",
+    tag: "ITSM · Python · Flask · Automation",
+    repo: "RinaRim803/it-ticket-system",
+    tags: ["Python", "Flask", "SQLite3", "REST API", "ITIL", "ITSM"],
+    scenario:
+      'A server goes down at 2 AM. The technician fixes it, but there is <span style="color:var(--warning);">no record</span> of what happened or why, leaving the team in the dark when it fails again.',
+    problem:
+      '"I fixed it, but I forgot to log it." This lack of documentation meant recurring issues were never identified, and critical system failures were prioritized by "whoever shouted loudest," not by actual business impact.',
+    solution:
+      "Developed a Flask-based ITSM API that acts as a central brain. It automatically captures system alerts, assigns ITIL-standard priorities (P1–P4) based on severity, and forces every 'fix' into a traceable lifecycle.",
+    result:
+      "Eliminated the 'Black Box' of manual support. Every system hiccup now has a digital paper trail, allowing for <strong>data-driven root cause analysis</strong> instead of relying on memory.",
+    active: true,
   },
+  {
+    id: "ad-automation",
+    title: "IAM & AD Automation Simulator",
+    tag: "Identity Management",
+    repo: "RinaRim803/ad-automation",
+    tags: ["Python", "SQLite", "IAM", "IT Automation"],
+    scenario:
+      'User reports: <span style="color:var(--warning);">My new team member started today, but they can\'t log into the VPN or see the shared drive. We\'re losing a whole day of work.</span>"',
+    problem:
+      '(Manual) High risk of human error, inconsistent permission sets, and "Day-One" productivity loss due to back-and-forth communication.',
+    solution:
+      "A Python-based tool that simulates Implementing Dynamic Groups and Attribute-Based Access Control (ABAC) to automate permission syncing based on HR data.",
+    result:
+      "Zero-day readiness for new hires and reduced IT ticket volume, ensuring consistent security compliance.",
+    active: true,
+  },
+  // {
+  //   id: "device-config-scripts",
+  //   title: "Device Configuration Scripts",
+  //   tag: "coming soon",
+  //   repo: "coming soon",
+  //   tags: ["Python", "SQLite3", "ITSM"],
+  //   scenario: "",
+  //   problem: "",
+  //   solution: "",
+  //   result: "TBD",
+  //   active: false,
+  // },
 ];
