@@ -1,3 +1,22 @@
+// ── Parallax blobs ──
+(function () {
+  var b1 = document.getElementById("blob-1");
+  var b2 = document.getElementById("blob-2");
+  var b3 = document.getElementById("blob-3");
+  if (!b1) return;
+  window.addEventListener(
+    "scroll",
+    function () {
+      var y = window.scrollY;
+      b1.style.transform = "translateY(" + y * 0.13 + "px)";
+      b2.style.transform = "translateY(" + -y * 0.09 + "px)";
+      b3.style.transform =
+        "translateY(" + y * 0.06 + "px) translateX(" + y * 0.03 + "px)";
+    },
+    { passive: true }
+  );
+})();
+
 // ── Fade-in on scroll ──
 const observer = new IntersectionObserver(
   (entries) => {
